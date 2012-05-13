@@ -443,8 +443,55 @@ int knapsack_re(int v[], int w[], int num, int capacity)
 }
 
 
+//Travel Salesman Problem
+//Given n cities and the distance between any two of them, we wish to find the shortest tour goinh through all cities and back to the starting city.
+//Usually the TSP is given as G=(V,D), where V={1,2,...n} is the set of cities, and D is the adjacency distance matrix.
+//The problem is to find the tour with minimal distance weight, that starting in 1 goes trough all n cities and returns to 1.
 
 
+/*
+Input	:distancet[j][i] distance from city j+1 to city i+1
+		:N number of cities in total
+*/
+int travel_salesman_problem(int *distance[], int N)
+{
+	int i, j, s;
+	int **cost; //cost[n][c]	//the cost of starting from 1, going through n citys and reaching city c+1 (c!=0)
+	int tmp, min = MAX_VALUE;
+
+	//allocate memory
+	mem_alloc_2D_int(&cost, N, N);
+	
+	//fill in the table
+	for (s=0; s<N-1; s++)
+	{
+		for (j=1; j<N; j++)
+		{
+			if (s==0)
+				cost[s][j] = distance[0][j];
+			else
+			{
+				for (i=1; i<N; i++)
+				{
+					tmp = cost[s-1][i]+distance[i][j];
+					if (tmp<min) min = tmp;
+				}
+			}
+		}
+	}
+
+	min = MAX_VALUE;
+	for (j=1; j<N; j++)
+	{
+		tmp = cost[N-2][j]+distance[j][0];
+		if (tmp < min) min = tmp;
+	}
+
+	//release memory
+	mem_free_2D_int(cost, N);
+
+	return min;
+}
 
 
 

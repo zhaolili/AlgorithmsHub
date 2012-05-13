@@ -6,4 +6,7 @@
 CELL** mem_alloc_2D(CELL ***table, int len1, int len2);
 void mem_free_2D(CELL **table, int len);
 
+void mem_free_2D_int(int **table, int len);
+int** mem_alloc_2D_int(int ***table, int len1, int len2);
+
 #endif
