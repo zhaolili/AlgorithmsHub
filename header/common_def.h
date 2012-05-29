@@ -22,5 +22,6 @@ typedef struct
 	int	y;			//the row number.
 	int	flag;	//true, if the xth character of string1 equals the yth character of string2.
 }CELL;
+#define MAX_VALUE 1000000
 
 #endif
